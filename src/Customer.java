@@ -19,7 +19,8 @@ public class Customer {
     public String toString(){
         String s = "";
         return String.valueOf(this.id) + "," +
-                name + String.valueOf(this.age) + "," +
+                name + "," +  
+		String.valueOf(this.age) + "," +
                 String.valueOf(this.countryCode) + "," +
                 String.valueOf(this.salary);
     }
