@@ -81,35 +81,32 @@ public class Generator {
             }
         }
 
-        List<Transaction> transactions = new ArrayList<Transaction>();
-        for(int i = 0; i < 5000000; i += 100){
-            for(int j = 1; j < 101; j++){
-                int custId = i/100 + 1;
-                int transId = i + j;
-                Transaction t = generateRandomTransaction(transId, custId);
-                transactions.add(t);
-                System.out.println(t.toString());
-            }
-        }
-
-        //write transaction csv file
-        try{
-            fw = new FileWriter("transactions.csv");
-            for(Transaction t: transactions){
-                fw.append(t.toString());
-                fw.append(NEW_LINE_SEPARATOR);
-            }
-        }catch (Exception e){
-            System.out.println("Error in csv writing");
-            e.printStackTrace();
-        }finally {
-            try{
-                fw.flush();
-                fw.close();
-            }catch (IOException e){
-                System.out.println("Error while flushing/closing");
-                e.printStackTrace();
-            }
-        }
+        //List<Transaction> transactions = new ArrayList<Transaction>();
+	try {        
+		for(int i = 0; i < 5000000; i += 100){
+            		for(int j = 1; j < 101; j++){
+				int custId = i/100 + 1;
+				int transId = i + j;
+				Transaction t = generateRandomTransaction(transId, custId);
+				//transactions.add(t);
+				//write transaction csv file
+			    	fw = new FileWriter("transactions.csv");
+				fw.append(t.toString());
+				fw.append(NEW_LINE_SEPARATOR);
+                		System.out.println(t.toString());
+		    }
+		}
+	}catch (Exception e){
+	    System.out.println("Error in csv writing");
+	    e.printStackTrace();
+	}finally {
+	    try{
+	        fw.flush();
+	        fw.close();
+	    }catch (IOException e){
+	        System.out.println("Error while flushing/closing");
+	        e.printStackTrace();
+	    }
+	}
     }
 }
