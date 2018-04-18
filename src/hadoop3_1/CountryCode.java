@@ -1,3 +1,4 @@
+package hadoop3_1;
 import java.io.IOException;
 import java.util.StringTokenizer;
 
@@ -14,9 +15,9 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 public class CountryCode {
 	
 	public static class CodeMapper 
-		extends Mapper<Object, Text, IntWriteable, IntWritable> {
+		extends Mapper<Object, Text, IntWritable, IntWritable> {
 
-		public void map(Object key, Text value, Context context) {
+		public void map(Object key, Text value, Context context) throws IOException, InterruptedException{
 			StringTokenizer tkns = new StringTokenizer(value.toString(), "\n");
 			while(tkns.hasMoreTokens()) {
 				String cust = tkns.nextToken();
@@ -34,12 +35,12 @@ public class CountryCode {
 	public static void main(String[] args) throws Exception {
 		Configuration conf = new Configuration();
 		Job j = Job.getInstance(conf, "Country Codes");
-		j.setJarByClass(CounryCode.class);
+		j.setJarByClass(CountryCode.class);
 		j.setMapperClass(CodeMapper.class);
 		j.setOutputKeyClass(IntWritable.class);
 		j.setOutputValueClass(IntWritable.class);
-		FileInputFormat.addInputPath(j, new Path(args[0]);
-		FileOutputFormat.addOutputPath(j, new Path(args[1]);
+		FileInputFormat.setInputPaths(j, new Path(args[0]));
+		FileOutputFormat.setOutputPath(j, new Path(args[1]));
 		System.exit(j.waitForCompletion(true) ? 0 : 1);
 	}
 }
