@@ -83,6 +83,7 @@ public class Generator {
 
         //List<Transaction> transactions = new ArrayList<Transaction>();
 	try {        
+		fw = new FileWriter("transactions.csv");
 		for(int i = 0; i < 5000000; i += 100){
             		for(int j = 1; j < 101; j++){
 				int custId = i/100 + 1;
@@ -90,7 +91,6 @@ public class Generator {
 				Transaction t = generateRandomTransaction(transId, custId);
 				//transactions.add(t);
 				//write transaction csv file
-			    	fw = new FileWriter("transactions.csv");
 				fw.append(t.toString());
 				fw.append(NEW_LINE_SEPARATOR);
                 		System.out.println(t.toString());
