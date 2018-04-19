@@ -108,6 +108,7 @@ public class Generator {
 		    }catch (IOException e){
 		        System.out.println("Error while flushing/closing");
 		        e.printStackTrace();
+
 		    }
 		}
     }
