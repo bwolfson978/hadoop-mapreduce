@@ -54,6 +54,7 @@ public class Generator {
     }
 
     public static void main(String[] args){
+    	/*
         List<Customer> customers = new ArrayList<Customer>();
         for(int i = 1; i < 50001; i++){
             Customer c = generateRandomCustomer(i);
@@ -80,33 +81,34 @@ public class Generator {
                 e.printStackTrace();
             }
         }
-
-        //List<Transaction> transactions = new ArrayList<Transaction>();
-	try {        
-		for(int i = 0; i < 5000000; i += 100){
-            		for(int j = 1; j < 101; j++){
-				int custId = i/100 + 1;
-				int transId = i + j;
-				Transaction t = generateRandomTransaction(transId, custId);
-				//transactions.add(t);
-				//write transaction csv file
-			    	fw = new FileWriter("transactions.csv");
-				fw.append(t.toString());
-				fw.append(NEW_LINE_SEPARATOR);
-                		System.out.println(t.toString());
+        */
+    	FileWriter fw = null;
+	    //List<Transaction> transactions = new ArrayList<Transaction>();
+		try {
+			//write transaction csv file
+		    fw = new FileWriter("transactions.csv");
+			for(int i = 0; i < 5000000; i += 100){
+	            for(int j = 1; j < 101; j++){
+					int custId = i/100 + 1;
+					int transId = i + j;
+					Transaction t = generateRandomTransaction(transId, custId);
+					//transactions.add(t);
+					fw.append(t.toString());
+					fw.append(NEW_LINE_SEPARATOR);
+	                System.out.println(t.toString());
+			    }
+			}
+		}catch (Exception e){
+		    System.out.println("Error in csv writing");
+		    e.printStackTrace();
+		}finally {
+		    try{
+		        fw.flush();
+		        fw.close();
+		    }catch (IOException e){
+		        System.out.println("Error while flushing/closing");
+		        e.printStackTrace();
 		    }
 		}
-	}catch (Exception e){
-	    System.out.println("Error in csv writing");
-	    e.printStackTrace();
-	}finally {
-	    try{
-	        fw.flush();
-	        fw.close();
-	    }catch (IOException e){
-	        System.out.println("Error while flushing/closing");
-	        e.printStackTrace();
-	    }
-	}
     }
 }
